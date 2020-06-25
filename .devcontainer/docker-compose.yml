@@ -3,9 +3,9 @@ services:
 
 ## Starts up mySQL server for ubyssey.ca and Dispatch
   db:
-    image: keeganlandrigan/ubyssey-dev-db:0.0.1
+    image: mysql:5.7
     volumes:
-      - data:/var/lib/mysql
+      - database:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ubyssey
       MYSQL_USER: root
@@ -23,6 +23,7 @@ services:
   django:
     image: keeganlandrigan/ubyssey.ca:latest
     volumes:
+      - sitedata:/ubyssey.ca/
       - .:/ubyssey.ca/tmp
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.development
@@ -35,6 +36,17 @@ services:
     stdin_open: true
     tty: true
 
-
+  frontend-buildchain:
+    build: 
+      context: .
+      dockerfile: Dockerfile-Gulp
+    volumes:
+      - sitedata:/ubyssey.ca/      
+    depends_on:
+      - django
+    
 volumes:
-  data: {}
+  database:
+    external:
+      name: ubyssey_db_volume
+  sitedata:
