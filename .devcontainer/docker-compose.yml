@@ -35,15 +35,6 @@ services:
       - db
     stdin_open: true
     tty: true
-
-  frontend-buildchain:
-    build: 
-      context: .
-      dockerfile: Dockerfile-Gulp
-    volumes:
-      - sitedata:/ubyssey.ca/      
-    depends_on:
-      - django
     
 volumes:
   database:
