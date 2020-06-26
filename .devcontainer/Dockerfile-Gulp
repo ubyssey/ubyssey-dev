@@ -1,4 +1,0 @@
-FROM node:14.4.0-stretch-slim
-RUN npm install -g gulp
-WORKDIR /ubyssey.ca/ubyssey/static/
-ENTRYPOINT ["gulp"]
