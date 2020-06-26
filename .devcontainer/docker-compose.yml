@@ -21,9 +21,9 @@ services:
 
 ## Starts up Django server for ubyssey.ca
   django:
-    image: keeganlandrigan/ubyssey.ca:latest
+    image: ubyssey/ubyssey-dispatch:latest
     volumes:
-      - .:/ubyssey.ca/tmp
+      - .:/workspaces/ubyssey.ca/tmp
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.development
       GOOGLE_APPLICATION_CREDENTIALS: somecredentials
