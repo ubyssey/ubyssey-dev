@@ -21,7 +21,7 @@ services:
 
 ## Starts up Django server for ubyssey.ca
   django:
-    image: ubyssey/ubyssey.ca:latest
+    image: ubyssey/ubyssey-dispatch:latest
     volumes:
       - ..:/workspaces/mount
       - .:/workspaces/ubyssey.ca/tmp
