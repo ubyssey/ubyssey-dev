@@ -29,11 +29,19 @@
 		"python.linting.pylintEnabled": true,
 		"python.linting.pylintPath": "/usr/local/bin/pylint",
 	},
-	
+		
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
-		"ms-python.python"
+		"ms-python.python",
+		"batisteo.vscode-django"
 	],
+	
+	"files.associations": {
+		"**/*.html": "html",
+		"**/templates/**/*.html": "django-html",
+		"**/templates/**/*": "django-txt",
+		"**/requirements{/**,*}.{txt,in}": "pip-requirements"
+	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
 	"forwardPorts": [4444,8000],
