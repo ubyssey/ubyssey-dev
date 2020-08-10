@@ -29,6 +29,10 @@
 		"python.linting.pylintEnabled": true,
 		"python.linting.pylintPath": "/usr/local/bin/pylint",
 	},
+	
+	"python.linting.pylintArgs": [
+		"--load-plugins=pylint_django"
+	],
 		
 	// Add the IDs of extensions you want installed when the container is created.
 	"extensions": [
