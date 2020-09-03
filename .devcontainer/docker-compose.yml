@@ -3,9 +3,9 @@ services:
 
 ## Starts up mySQL server for ubyssey.ca and Dispatch
   db:
-    image: keeganlandrigan/ubyssey-dev-db:0.0.1
+    image: mysql:5.7
     volumes:
-      - data:/var/lib/mysql
+      - database:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: ubyssey
       MYSQL_USER: root
@@ -23,18 +23,30 @@ services:
   django:
     image: ubyssey/ubyssey-dispatch:latest
     volumes:
+      - ..:/workspaces/mount
       - .:/workspaces/ubyssey.ca/tmp
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.development
       GOOGLE_APPLICATION_CREDENTIALS: somecredentials
-    ports:
-      - "8000:8000"
-      - "4444:4444"
+    # ports:
+      # # If you uncomment these, it will enable port TUNNELLING for the container
+      # # Allocation of port tunnel can conflict with port forwarding! If you have issues make sure you're only using one or the other!
+      # - "8000:8000"
+      # - "4444:4444"
     depends_on:
       - db
     stdin_open: true
     tty: true
-
-
+    
+## Static filewatcher
+  filewatcher:
+    image: ubyssey/ubyssey-watcher:latest
+    volumes:
+      - ../ubyssey.ca/ubyssey/static/src:/src
+    depends_on:
+      - django
+    
 volumes:
-  data: {}
+  database:
+    external:
+      name: ubyssey_db_volume
