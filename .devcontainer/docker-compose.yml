@@ -28,9 +28,11 @@ services:
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.development
       GOOGLE_APPLICATION_CREDENTIALS: somecredentials
-    ports:
-      - "8000:8000"
-      - "4444:4444"
+    # ports:
+      # # If you uncomment these, it will enable port TUNNELLING for the container
+      # # Allocation of port tunnel can conflict with port forwarding! If you have issues make sure you're only using one or the other!
+      # - "8000:8000"
+      # - "4444:4444"
     depends_on:
       - db
     stdin_open: true
