@@ -21,7 +21,7 @@ services:
 
 ## Starts up Django server for ubyssey.ca
   django:
-    image: ubyssey/ubyssey-dispatch:latest
+    image: ubyssey/ubyssey.ca:latest
     volumes:
       - ..:/workspaces/mount
       - .:/workspaces/ubyssey.ca/tmp
@@ -38,13 +38,13 @@ services:
     stdin_open: true
     tty: true
     
-## Static filewatcher
-  filewatcher:
-    image: ubyssey/ubyssey-watcher:latest
-    volumes:
-      - ../ubyssey.ca/ubyssey/static/src:/src
-    depends_on:
-      - django
+# ## Static filewatcher
+  # filewatcher:
+    # image: ubyssey/ubyssey-watcher:latest
+    # volumes:
+      # - ../ubyssey.ca/ubyssey/static/src:/src
+    # depends_on:
+      # - django
     
 volumes:
   database:
