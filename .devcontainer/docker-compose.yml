@@ -25,7 +25,6 @@ services:
       - .:/workspaces/ubyssey.ca/tmp
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.development
-      GOOGLE_APPLICATION_CREDENTIALS: somecredentials
     # ports:
       # # If you uncomment these, it will enable port TUNNELLING for the container
       # # Allocation of port tunnel can conflict with port forwarding! If you have issues make sure you're only using one or the other!
