@@ -43,6 +43,14 @@ services:
       # - ../ubyssey.ca/ubyssey/static/src:/src
     # depends_on:
       # - django
+## 
+  cache:
+    platform: linux/x86_64
+    image: memcached:1.6.10
+    ports:
+      - "11211:11211"
+    depends_on:
+      - django
     
 volumes:
   database:
