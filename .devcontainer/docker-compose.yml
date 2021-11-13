@@ -20,17 +20,17 @@ services:
 
 ## Starts up Django server for ubyssey.ca
   django:
-    image: ubyssey/ubyssey-dispatch:latest
+    image: ubyssey/ubyssey.ca:latest
     volumes:
       - ..:/workspaces/mount
       - .:/workspaces/ubyssey.ca/tmp
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.development
-    # ports:
+    #ports:
       # # If you uncomment these, it will enable port TUNNELLING for the container
       # # Allocation of port tunnel can conflict with port forwarding! If you have issues make sure you're only using one or the other!
-      # - "8000:8000"
-      # - "4444:4444"
+    #  - "8000:8000"
+    #  - "4444:4444"
     depends_on:
       - db
     stdin_open: true
