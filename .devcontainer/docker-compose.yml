@@ -1,53 +1,22 @@
 version: "3.7"
 services:
-  # selenium-hub:
-  #   image: selenium/hub:latest
-  #   container_name: selenium-hub
-  #   ports:
-  #     - "4442:4442"
-  #     - "4443:4443"
-  #     - "4444:4444"
-
-  # chrome:
-  #   image: selenium/node-chrome:latest
-  #   shm_size: 2gb
-  #   depends_on:
-  #     - selenium-hub
-  #   environment:
-  #     - SE_EVENT_BUS_HOST=selenium-hub
-  #     - SE_EVENT_BUS_PUBLISH_PORT=4442
-  #     - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-  #   volumes:
-  #     - /dev/shm:/dev/shm
-
-  # edge:
-  #   image: selenium/node-edge:latest
-  #   shm_size: 2gb
-  #   depends_on:
-  #     - selenium-hub
-  #   environment:
-  #     - SE_EVENT_BUS_HOST=selenium-hub
-  #     - SE_EVENT_BUS_PUBLISH_PORT=4442
-  #     - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-  #   volumes:
-  #     - /dev/shm:/dev/shm
-
-  # firefox:
-  #   image: selenium/node-firefox:latest
-  #   shm_size: 2gb
-  #   depends_on:
-  #     - selenium-hub
-  #   environment:
-  #     - SE_EVENT_BUS_HOST=selenium-hub
-  #     - SE_EVENT_BUS_PUBLISH_PORT=4442
-  #     - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
-  #   volumes:
-  #     - /dev/shm:/dev/shm
-  selenium:
+  selenium-chrome:
     image: selenium/standalone-chrome
     ports:
-      - 4444:4444 # Selenium
-      - 5900:5900 # VNC server
+      - 4444:4444
+      - 5900:5900 
+  selenium-edge:
+    image: selenium/standalone-edge
+    ports:
+      - 4445:4444 
+      - 5901:5900 
+
+  selenium-firefox:
+    image: selenium/standalone-firefox
+    ports:
+      - 4446:4444 
+      - 5902:5900 
+
 ## Starts up mySQL server for ubyssey.ca and Dispatch
   db:
     platform: linux/x86_64
@@ -83,7 +52,9 @@ services:
     stdin_open: true
     tty: true
     links:
-      - selenium
+      - selenium-chrome
+      - selenium-edge 
+      - selenium-firefox
     
 # ## Static filewatcher
   # filewatcher:
