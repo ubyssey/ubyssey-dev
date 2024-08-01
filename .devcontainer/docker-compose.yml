@@ -1,5 +1,25 @@
 version: "3.7"
 services:
+  selenium-chrome:
+    image: selenium/standalone-chrome:latest
+    ports:
+      - 4444:4444
+      - 7900:7900 
+    shm_size: 2gb
+    
+  selenium-edge:
+    image: selenium/standalone-edge:latest
+    ports:
+      - 4445:4444 
+      - 7901:7900 
+    shm_size: 2gb
+
+  selenium-firefox:
+    image: selenium/standalone-firefox:latest
+    ports:
+      - 4446:4444 
+      - 7902:7900 
+    shm_size: 2gb
 
 ## Starts up mySQL server for ubyssey.ca and Dispatch
   db:
@@ -35,6 +55,10 @@ services:
       - db
     stdin_open: true
     tty: true
+    links:
+      - selenium-chrome
+      - selenium-edge 
+      - selenium-firefox
     
 # ## Static filewatcher
   # filewatcher:
@@ -56,3 +80,4 @@ volumes:
   database:
     external:
       name: ubyssey_db_volume
+  
