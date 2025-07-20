@@ -43,7 +43,7 @@ services:
     image: ubyssey/ubyssey.ca:latest
     volumes:
       - ..:/app/mount
-      - .:/app/ubyssey.ca/tmp
+      - .:/app/tmp
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.development
     #ports:
