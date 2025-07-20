@@ -42,8 +42,8 @@ services:
   django:
     image: ubyssey/ubyssey.ca:latest
     volumes:
-      - ..:/workspaces/mount
-      - .:/workspaces/ubyssey.ca/tmp
+      - ..:/app/mount
+      - .:/app/ubyssey.ca/tmp
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.development
     #ports:
