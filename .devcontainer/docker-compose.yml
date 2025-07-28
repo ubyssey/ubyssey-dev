@@ -1,4 +1,5 @@
 version: "3.7"
+
 services:
   selenium-chrome:
     image: selenium/standalone-chrome:latest
@@ -6,13 +7,23 @@ services:
       - 4444:4444
       - 7900:7900 
     shm_size: 2gb
-    
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "1"
+
   selenium-edge:
     image: selenium/standalone-edge:latest
     ports:
       - 4445:4444 
       - 7901:7900 
     shm_size: 2gb
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "1"
 
   selenium-firefox:
     image: selenium/standalone-firefox:latest
@@ -20,8 +31,12 @@ services:
       - 4446:4444 
       - 7902:7900 
     shm_size: 2gb
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "1"
 
-## Starts up mySQL server for ubyssey.ca and Dispatch
   db:
     platform: linux/x86_64
     image: mysql:8.0
@@ -37,8 +52,12 @@ services:
       interval: 2s
       timeout: 20s
       retries: 20
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "1"
 
-## Starts up Django server for ubyssey.ca
   django:
     image: ubyssey/ubyssey.ca:latest
     volumes:
@@ -46,11 +65,6 @@ services:
       - .:/app/tmp
     environment:
       DJANGO_SETTINGS_MODULE: config.settings.development
-    #ports:
-      # # If you uncomment these, it will enable port TUNNELLING for the container
-      # # Allocation of port tunnel can conflict with port forwarding! If you have issues make sure you're only using one or the other!
-    #  - "8000:8000"
-    #  - "4444:4444"
     depends_on:
       - db
     stdin_open: true
@@ -59,15 +73,12 @@ services:
       - selenium-chrome
       - selenium-edge 
       - selenium-firefox
-    
-# ## Static filewatcher
-  # filewatcher:
-    # image: ubyssey/ubyssey-watcher:latest
-    # volumes:
-      # - ../ubyssey.ca/ubyssey/static/src:/src
-    # depends_on:
-      # - django
-## 
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "1"
+
   cache:
     platform: linux/x86_64
     image: memcached:1.6.10
@@ -75,9 +86,13 @@ services:
       - "11211:11211"
     depends_on:
       - django
-    
+    logging:
+      driver: json-file
+      options:
+        max-size: "10m"
+        max-file: "1"
+
 volumes:
   database:
     external:
       name: ubyssey_db_volume
-  
