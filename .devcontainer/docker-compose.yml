@@ -92,7 +92,16 @@ services:
         max-size: "10m"
         max-file: "1"
 
+  redis:
+    restart: always
+    image: redis:latest
+    volumes:
+      - redis-data:/var/lib/redis
+    ports:
+      - "6379:6379"
+
 volumes:
   database:
     external:
       name: ubyssey_db_volume
+  redis-data: {}
