@@ -69,10 +69,10 @@ services:
       - db
     stdin_open: true
     tty: true
-    links:
-      - selenium-chrome
-      - selenium-edge 
-      - selenium-firefox
+    # links:
+    #   - selenium-chrome
+    #   - selenium-edge 
+    #   - selenium-firefox
     logging:
       driver: json-file
       options:
@@ -96,4 +96,5 @@ volumes:
   database:
     external:
       name: ubyssey_db_volume
+
 
