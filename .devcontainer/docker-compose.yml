@@ -1,41 +1,41 @@
 version: "3.7"
 
 services:
-  selenium-chrome:
-    image: selenium/standalone-chrome:latest
-    ports:
-      - 4444:4444
-      - 7900:7900 
-    shm_size: 2gb
-    logging:
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "1"
+  # selenium-chrome:
+  #   image: selenium/standalone-chrome:latest
+  #   ports:
+  #     - 4444:4444
+  #     - 7900:7900 
+  #   shm_size: 2gb
+  #   logging:
+  #     driver: json-file
+  #     options:
+  #       max-size: "10m"
+  #       max-file: "1"
 
-  selenium-edge:
-    image: selenium/standalone-edge:latest
-    ports:
-      - 4445:4444 
-      - 7901:7900 
-    shm_size: 2gb
-    logging:
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "1"
+  # selenium-edge:
+  #   image: selenium/standalone-edge:latest
+  #   ports:
+  #     - 4445:4444 
+  #     - 7901:7900 
+  #   shm_size: 2gb
+  #   logging:
+  #     driver: json-file
+  #     options:
+  #       max-size: "10m"
+  #       max-file: "1"
 
-  selenium-firefox:
-    image: selenium/standalone-firefox:latest
-    ports:
-      - 4446:4444 
-      - 7902:7900 
-    shm_size: 2gb
-    logging:
-      driver: json-file
-      options:
-        max-size: "10m"
-        max-file: "1"
+  # selenium-firefox:
+  #   image: selenium/standalone-firefox:latest
+  #   ports:
+  #     - 4446:4444 
+  #     - 7902:7900 
+  #   shm_size: 2gb
+  #   logging:
+  #     driver: json-file
+  #     options:
+  #       max-size: "10m"
+  #       max-file: "1"
 
   db:
     platform: linux/x86_64
@@ -96,3 +96,4 @@ volumes:
   database:
     external:
       name: ubyssey_db_volume
+
