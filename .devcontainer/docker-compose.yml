@@ -58,6 +58,15 @@ services:
         max-size: "10m"
         max-file: "1"
 
+  redis:
+    restart: always
+    platform: linux/x86_64
+    image: redis:latest
+    volumes:
+      - redis-data:/var/lib/redis
+    ports:
+      - "6379:6379"
+      
   django:
     image: ubyssey/ubyssey.ca:latest
     volumes:
@@ -67,6 +76,7 @@ services:
       DJANGO_SETTINGS_MODULE: config.settings.development
     depends_on:
       - db
+      - redis
     stdin_open: true
     tty: true
     # links:
@@ -96,5 +106,6 @@ volumes:
   database:
     external:
       name: ubyssey_db_volume
+  redis-data: {}
 
 
